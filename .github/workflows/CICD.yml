@@ -17,10 +17,6 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: az-landingzone-githubactions
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,8 +28,8 @@ jobs:
         run: |
           az login \
             --service-principal \
-            --username 566aec41-04ea-4f0a-bbc9-4f982aeaf803
-            client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+            --username 566aec41-04ea-4f0a-bbc9-4f982aeaf803 \
+            --password "${{ secrets.AZURE_CLIENT_SECRET }}" \
             --tenant 2952c7c1-60bd-44d5-a94e-310e91e87cb9
 
       - name: Set Azure Subscription
