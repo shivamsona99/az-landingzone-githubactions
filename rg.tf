@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rgs1" {
 
 resource "azurerm_virtual_network" "vnets" {
   depends_on          = [azurerm_resource_group.rgs]
-  name                = "shivam-vnets"
+  name                = "shivam-vnets1"
   location            = "centralindia"
   resource_group_name = "shivamsona"
   address_space       = ["10.0.0.0/16"]
@@ -17,7 +17,7 @@ resource "azurerm_virtual_network" "vnets" {
 # Both the resource group and virtual network must be in the same region for best practics
 resource "azurerm_virtual_network" "name" {
   depends_on          = [azurerm_resource_group.rgs1]
-  name                = "shivam-vnets"
+  name                = "shivam-vnets2"
   location            = "centralindia"
   resource_group_name = "shivamsonasingh"
   address_space       = ["10.0.0.0/16"]
