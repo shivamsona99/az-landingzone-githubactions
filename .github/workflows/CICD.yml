@@ -33,7 +33,7 @@ jobs:
           az login \
             --service-principal \
             --username 566aec41-04ea-4f0a-bbc9-4f982aeaf803
-            --password lRw8Q~VsYSAQRzRETCf.IN1ZmnJ2I8TyTmJDuaRV
+            client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
             --tenant 2952c7c1-60bd-44d5-a94e-310e91e87cb9
 
       - name: Set Azure Subscription
