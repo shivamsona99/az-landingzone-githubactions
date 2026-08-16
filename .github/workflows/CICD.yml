@@ -1,0 +1,56 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - "**"
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Azure Login
+        run: |
+          az login \
+            --service-principal \
+            --username 566aec41-04ea-4f0a-bbc9-4f982aeaf803 \
+            --password "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant 2952c7c1-60bd-44d5-a94e-310e91e87cb9
+
+      - name: Set Azure Subscription
+        run: |
+          az account set \
+            --subscription 72f60f06-6468-4fce-a560-3651ff202b82
+
+      - name: Check Azure Login
+        run: az account show
+
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
