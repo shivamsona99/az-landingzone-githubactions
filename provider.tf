@@ -11,7 +11,7 @@ terraform {
     container_name       = "tfstate"
     key                  = "az-landingzone.tfstate"
 
-    }
+  }
 }
 provider "azurerm" {
   features {
