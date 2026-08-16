@@ -10,3 +10,10 @@ resource "azurerm_virtual_network" "vnets" {
   resource_group_name = "shivamsona"
   address_space = ["10.0.0.0/16"]
 }
+# Both the resource group and virtual network must be in the same region for best practics
+resource "azurerm_virtual_network" "name" {
+  name = "shivam-vnets"
+  location = "centralindia"
+  resource_group_name = "shivamsona"
+   address_space = ["10.0.0.0/16"]
+}
